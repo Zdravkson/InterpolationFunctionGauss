@@ -17,5 +17,6 @@ int main() {
         cout << "Unesite y koordinatu " << i + 1 << ". tacke: ";
         cin >> coordinates[i].second;
     }
+    // popunjavamo matricu sa koeficijentima jednacina sistema sa n jednacina i n nepoznatih
     return 0;
 }
