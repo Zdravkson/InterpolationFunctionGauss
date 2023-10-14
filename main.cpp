@@ -29,7 +29,7 @@ int main() {
     for(int i = 0; i < n; i++) {
         for(int j = i + 1; j < n; j++) {
             double tmpcoef = coefficientMatrix[j][i] / coefficientMatrix[i][i];
-            for(int k = 0; k < n; k++) {
+            for(int k = 0; k <= n; k++) {
                 coefficientMatrix[j][k] -= (tmpcoef * coefficientMatrix[i][k]);
             }
         }
@@ -42,13 +42,13 @@ int main() {
         }
         ans[i] = (coefficientMatrix[i][n] - tmpsum) / coefficientMatrix[i][i]; // oduzimamo sumu poznatih od desne strane i podelimo to sa koeficijentom ispred promenljive koju izracunavamo
     }
+    cout << "Interpolirani polinom je: ";
     for(int i = 0; i < n; i++) {
-        cout << ans[i] << " ";
-        // if(i == n - 1) {
-        //     cout << ans[i];
-        // } else {
-        //     cout << ans[i] << " * x^" << n - 1 - i << " + ";
-        // }
+        if(i == n - 1) {
+            cout << ans[i];
+        } else {
+            cout << ans[i] << " * x^" << n - 1 - i << " + ";
+        }
     }
     return 0;
 }

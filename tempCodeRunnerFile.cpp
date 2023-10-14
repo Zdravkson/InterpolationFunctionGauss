@@ -1,5 +1,5 @@
-    double tmpcoef = coefficientMatrix[j][i] / coefficientMatrix[i][i];
-            for(int k = 0; k < n; k++) {
-                coefficientMatrix[j][k] -= (tmpcoef * coefficientMatrix[i][k]);
-            }
+if(i == n - 1) {
+            cout << ans[i];
+        } else {
+            cout << ans[i] << " * x^" << n - 1 - i << " + ";
         }
