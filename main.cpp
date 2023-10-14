@@ -6,16 +6,24 @@ using namespace std;
 double coefficientMatrix[MAX_N][MAX_N + 1];
 double ans[MAX_N];
 pair<double, double> coordinates[MAX_N];
+const double eps = 0.000001;
 
 int main() {
     int n;
     cout << "Unesite broj koordinata: ";
     cin >> n;
+    cout << fixed << setprecision(5);
     for(int i = 0; i < n; i++) {
         cout << "Unesite x koordinatu " << i + 1 << ". tacke: ";
         cin >> coordinates[i].first;
         cout << "Unesite y koordinatu " << i + 1 << ". tacke: ";
         cin >> coordinates[i].second;
+    }
+    // postoji "edge-case" gde treba staviti tacku sa koordinatom x = 0 (ako postoji) na poslednje mesto u nizu kako bi se izbeglo deljenje sa 0
+    for(int i = 0; i < n; i++) {
+        if(coordinates[i].first == 0) {
+            coordinates[i].swap(coordinates[n - 1]);
+        }
     }
     // popunjavamo matricu sa koeficijentima jednacina sistema sa n jednacina i n nepoznatih
     for(int i = 0; i < n; i++) {
@@ -44,10 +52,15 @@ int main() {
     }
     cout << "Interpolirani polinom je: ";
     for(int i = 0; i < n; i++) {
-        if(i == n - 1) {
-            cout << ans[i];
+        if(abs(ans[i]) < eps) { // nema potrebe da ispisujemo monome koji ispred sebe imaju 0 koeficijent kada nemaju ulogu u izracunavanju polinoma
+            continue;
+        }
+        if(i == 0) {
+            cout << ans[i] << "*x^" << n - 1 - i << " ";
+        } else if(ans[i] < 0){
+            cout << ans[i] << "*x^" << n - 1 - i << " ";
         } else {
-            cout << ans[i] << " * x^" << n - 1 - i << " + ";
+            cout << "+" << ans[i] << "*x^" << n - 1 - i << " ";
         }
     }
     return 0;
